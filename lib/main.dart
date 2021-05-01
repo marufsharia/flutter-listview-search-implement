@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:english_words/english_words.dart';
 
 void main() {
   runApp(ListViewSearch());
@@ -12,11 +13,15 @@ class ListViewSearch extends StatefulWidget {
 class _ListViewSearchState extends State<ListViewSearch> {
   final searchTextFromController = new TextEditingController();
 
-  final items = List<String>.generate(10000, (i) => 'Item No $i');
+  final items = List<String>();
+
+  //final items = List<String>.generate(10000, (i) => 'Item No $i');
   final copyItemList = List<String>();
 
   @override
   void initState() {
+    all.take(4000).forEach((word) => items.add(word.toLowerCase()));
+    items.sort((a, b) => a.compareTo(b));
     copyItemList.addAll(items); //copying original list as backup
     super.initState();
   }
